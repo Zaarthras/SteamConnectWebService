@@ -8,7 +8,7 @@ RewriteCond %{REQUEST_URI} !^/impressum$
 RewriteCond %{REQUEST_URI} !^/impressum.html$
 RewriteCond %{REQUEST_URI} !^/datenschutz$
 RewriteCond %{REQUEST_URI} !^/datenschutz.html$
-RewriteCond %{REQUEST_URI} !^/index.php$  # Exclude index.php from being rewritten
+RewriteCond %{REQUEST_URI} !^/index.php$
 
 # Internal rewrite to index.php for everything else
 RewriteRule ^(.*)$ /index.php [L]
