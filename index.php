@@ -11,6 +11,20 @@
   $ipAndPort = null;
   $landingPage = false;
 
+  if (preg_match('/^(?:\d{1,3}\.){3}\d{1,3}(?::\d{1,5})?$/', $path)) {
+    $ipAndPort = $path;
+  }
+  else if (preg_match('/^((?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})((?::\d{1,5})?)$/', $path, $matches)) {
+    $domain = $matches[1];
+    $port = $matches[2];
+    $ip = gethostbyname($domain);
+    if ($ip == $domain) {
+      $landingPage = true;
+    }
+    else {
+      $ipAndPort = $ip . $port;
+    }
+  }
   if (preg_match('/^((?:\d{1,3}\.){3}\d{1,3}|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})(?::\d{1,5})?$/', $path)) {
     $ipAndPort = $path;
   }
@@ -25,7 +39,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title><?php echo $landingPage ? "Steam Connect Web Service" : "Connect to " . $ipAndPort; ?></title>
+  <title><?php echo $landingPage ? "Steam Connect Web Service" : "Connect to " . $path; ?></title>
   <link rel="icon" type="image/png" href="./favicon.png">
 
   <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -70,22 +84,22 @@
 
           <div class="mb-3">
             <div class="d-grid gap-2">
-              <a href="steam://connect/<?php echo $ipAndPort; ?>" class="btn btn-primary">Connect to <code><?php echo $ipAndPort; ?></code></a>
+              <a href="steam://connect/<?php echo $ipAndPort; ?>" class="btn btn-primary">Connect to <code><?php echo $path; ?></code></a>
             </div>
           </div>
 
           <div>
             <label class="form-label"><small>If the button does not work, copy this command into your game's console:</small></label>
             <div class="input-group">
-              <input type="text" class="form-control" id="console-command" aria-label="Connect to the server" value="connect <?php echo $ipAndPort; ?>" readonly>
+              <input type="text" class="form-control" id="console-command" aria-label="Connect to the server" value="connect <?php echo $path; ?>" readonly>
               <button class="btn btn-secondary" id="console-command-copy">Copy</button>
             </div>
           </div>
 
-          <div class="card-footer">
-            This website does not collect any personal data.
-          </div>
+        </div>
 
+        <div class="card-footer">
+          This website does not collect any personal data.
         </div>
 
       </div>
