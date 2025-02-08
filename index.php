@@ -136,7 +136,7 @@
       setTimeout(() => {
         windowNew = false;
         console.log("timeout")
-      }, 100);
+      }, 1000);
 
       window.onblur = () => {
         console.log("blur")
