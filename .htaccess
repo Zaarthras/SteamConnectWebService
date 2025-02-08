@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Don't rewrite requests for CSS, JS, favicon, impressum, and datenschutz
+RewriteCond %{REQUEST_URI} !^/css/
+RewriteCond %{REQUEST_URI} !^/js/
+RewriteCond %{REQUEST_URI} !^/favicon.png
+RewriteCond %{REQUEST_URI} !^/impressum$
+RewriteCond %{REQUEST_URI} !^/impressum.html$
+RewriteCond %{REQUEST_URI} !^/datenschutz$
+RewriteCond %{REQUEST_URI} !^/datenschutz.html$
+
+# Redirect everything else to index.php
+RewriteRule ^(.*)$ /index.php [L]
