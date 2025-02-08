@@ -135,15 +135,18 @@
 
       setTimeout(() => {
         windowNew = false;
+        console.log("timeout")
       }, 100);
 
       window.onblur = () => {
+        console.log("blur")
         if (windowNew) {
           popupOpen = true;
         }
       }
 
       window.onfocus = () => {
+        console.log("focus")
         if (popupOpen) {
           window.close();
           popupOpen = false;
